@@ -15,6 +15,7 @@ console.log(projetData)
         
      }
  }
+ 
  projectList(projetData)
 
 
