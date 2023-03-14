@@ -25,7 +25,54 @@ fetch(url)
            
         }
     }
-    projectList(data)
+    console.log(data);
+    projectList(data);
+
+    const boutonFilterBase = document.querySelector(".btn_filter_base");
+    boutonFilterBase.addEventListener("click", function(){
+        document.querySelector('.gallery').innerHTML = "";
+        projectList(data);
+    })
+
+
+
+    const boutonFilterObjets = document.querySelector(".btn_filter_objets");
+
+    boutonFilterObjets.addEventListener("click", function () {
+        const objetsFilter = data.filter(function (data){
+            return data.categoryId === 1;
+        })
+        document.querySelector('.gallery').innerHTML = "";
+        projectList(objetsFilter);
+    });
+
+
+
+   const boutonFilterAppartements = document.querySelector(".btn_filter_appartements");
+   boutonFilterAppartements.addEventListener("click", function(){
+    const appartementsFilter = data.filter(function(data){
+        return data.categoryId === 2;
+    })
+    document.querySelector('.gallery').innerHTML = "";
+    projectList(appartementsFilter);
+   })
+
+
+
+   const boutonFilterRestaurants = document.querySelector(".btn_filter_restaurants");
+   boutonFilterRestaurants.addEventListener("click", function(){
+    const restaurantsFilter = data.filter(function(data){
+        return data.categoryId === 3;
+    })
+    document.querySelector('.gallery').innerHTML = "";
+    projectList(restaurantsFilter);
+   })
+
+
+
+
+
+
 });
 
  
