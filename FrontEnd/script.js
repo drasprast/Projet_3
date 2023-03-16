@@ -5,6 +5,7 @@ const url = 'http://localhost:5678/api/works';
 fetch(url)
 .then((response) => response.json())
 .then((data) => {
+    
 
     function projectList(data){
         for (let i = 0; i < data.length; i++){
@@ -28,6 +29,7 @@ fetch(url)
     console.log(data);
     projectList(data);
 
+    
     const boutonFilterBase = document.querySelector(".btn_filter_base");
     boutonFilterBase.addEventListener("click", function(){
         document.querySelector('.gallery').innerHTML = "";
@@ -68,12 +70,10 @@ fetch(url)
     projectList(restaurantsFilter);
    })
 
-
-
-
-
-
-});
+})
+.catch((error) => {
+    console.error('Error:', error);
+  });
 
  
 
