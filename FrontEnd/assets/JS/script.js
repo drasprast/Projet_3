@@ -2,19 +2,23 @@
 
 const url = 'http://localhost:5678/api/works';
 
+let projectsData; 
+
 fetch(url)
 .then((response) => response.json())
 .then((data) => {
-    
+    projectsData = data; 
+    console.log(projectsData);
 
-    function projectList(data){
+    function projectDisplay(data){
         for (let i = 0; i < data.length; i++){
    
             const projet = data[i]; 
             
             const divGallery = document.querySelector('.gallery');
             const dataElement = document.createElement("figure");
-            dataElement.dataset.id = data[i].id
+            dataElement.dataset.id = data[i].id;
+            dataElement.dataset.categoryId = data[i].categoryId;
             const imgElement = document.createElement("img");
             imgElement.src = projet.imageUrl;
             const titleElement = document.createElement("figcaption");
@@ -26,54 +30,53 @@ fetch(url)
            
         }
     }
-    console.log(data);
-    projectList(data);
+    
+    projectDisplay(data);
 
     
     const boutonFilterBase = document.querySelector(".btn_filter_base");
     boutonFilterBase.addEventListener("click", function(){
         document.querySelector('.gallery').innerHTML = "";
-        projectList(data);
+        projectDisplay(projectsData);
     })
 
 
 
     const boutonFilterObjets = document.querySelector(".btn_filter_objets");
-
-    boutonFilterObjets.addEventListener("click", function () {
-        const objetsFilter = data.filter(function (data){
-            return data.categoryId === 1;
+    boutonFilterObjets.addEventListener("click", function(){
+        const objetsFilter = projectsData.filter(function (projectsData){
+            return projectsData.categoryId === 1;
         })
         document.querySelector('.gallery').innerHTML = "";
-        projectList(objetsFilter);
+        projectDisplay(objetsFilter);
     });
+
 
 
 
    const boutonFilterAppartements = document.querySelector(".btn_filter_appartements");
    boutonFilterAppartements.addEventListener("click", function(){
-    const appartementsFilter = data.filter(function(data){
-        return data.categoryId === 2;
-    })
-    document.querySelector('.gallery').innerHTML = "";
-    projectList(appartementsFilter);
+        const appartementsFilter = projectsData.filter(function (projectsData){
+            return projectsData.categoryId === 2;
+        })
+        document.querySelector('.gallery').innerHTML = "";
+        projectDisplay(appartementsFilter);
    })
 
 
 
    const boutonFilterRestaurants = document.querySelector(".btn_filter_restaurants");
    boutonFilterRestaurants.addEventListener("click", function(){
-    const restaurantsFilter = data.filter(function(data){
-        return data.categoryId === 3;
-    })
-    document.querySelector('.gallery').innerHTML = "";
-    projectList(restaurantsFilter);
+        const restaurantsFilter = projectsData.filter(function(projectsData){
+            return projectsData.categoryId === 3;
+        })
+        document.querySelector('.gallery').innerHTML = "";
+        projectDisplay(restaurantsFilter);
    })
-
 })
 .catch((error) => {
-    console.error('Error:', error);
-  });
+    console.log('Une erreur est survenue:', error);
+});
 
  
 
