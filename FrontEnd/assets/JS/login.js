@@ -3,8 +3,8 @@ const form = document.querySelector('.form');
 const emailInput = document.querySelector('.email');
 const passwordInput = document.querySelector('.password');
 
-form.addEventListener('submit', function(get) {
-  get.preventDefault();
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
 
   const email = emailInput.value;
   const password = passwordInput.value;
