@@ -31,7 +31,8 @@ form.addEventListener('submit', function(e) {
     return response.json();
   })
   .then(data => {
-    localStorage.setItem('token', data.token);
+    const token = data.token;
+    localStorage.setItem('token', token);
     console.log(data.token);
     console.log('Connexion réussie !');
     window.location.href = 'index.html'; 
