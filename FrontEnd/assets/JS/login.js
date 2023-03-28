@@ -34,8 +34,9 @@ form.addEventListener('submit', function(e) {
     const token = data.token;
     localStorage.setItem('token', token);
     console.log(data.token);
-    console.log('Connexion réussie !');
-    window.location.href = 'index.html'; 
+    window.location.href = 'index.html';  
+    
+    
   })
   .catch(error => {
     console.error(error);

@@ -78,6 +78,19 @@ fetch(url)
     console.log('Une erreur est survenue:', error);
 });
 
+if (localStorage.token) {  
+  
+       const filtres = document.querySelector('.filtres');
+       filtres.style.display = "none";
+
+       const lienModifier = document.querySelector('.lien_modifier');
+       const aElement = document.createElement("a");
+       aElement.innerHTML = "modifier";
+       aElement.setAttribute("href", "#modal1");
+       aElement.classList.add("js_modal");
+       lienModifier.appendChild(aElement);
+       
+}
  
 
 
