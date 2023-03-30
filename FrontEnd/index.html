@@ -37,6 +37,7 @@
 	</section>
 	<section id="portfolio">
 		<h2>Mes Projets</h2>
+		<div class="lien_modifier"></div>
 		<section class="filtres">
 			<button class="btn_filter_base filter_button">Tous</button>
 			<button class="btn_filter_objets filter_button">Objets</button>
@@ -44,7 +45,7 @@
 			<button class="btn_filter_restaurants filter_button">Hôtels & restaurants</button>
 			<!-- <a href="#modal1" class="js_modal">modifier</a> -->
 		</section>
-		<div class="lien_modifier"></div>
+		
 		<div class="gallery">
 			<!-- <figure>
 				<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
@@ -93,18 +94,37 @@
 		</div>
 	</section>
 
-	
-		
 		<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="titlemodal" style="display:none;">
 			<div class="modal_wrapper js_stop_modal">
-				<h2 id="titlemodal">Galerie photo</h2>
-				<span class="js_close_modal">&times;</span>
+				<div class="modal_flex"><h2 id="titlemodal">Galerie photo</h2>
+				<span class="js_close_modal close_modal">&times;</span></div>
+				<div class="gallery">
+					<!-- <figure>
+						<img src="" alt="">
+						<button>delete</button>
+						<button>éditer</button>
+					</figure> -->
+				</div>
 				<button>Ajouter une photo</button>
-				<a href="#">Supprimer la galerie</a>
-			</div>
-			
+				<a href="#">Supprimer la galerie</a> 
+			</div>		
 		</aside>
-	
+
+
+		<form id="myForm">
+			<label for="image">Image:</label>
+			<input type="file" id="image" name="image"><br>
+			<label for="title">Title:</label>
+			<input type="text" id="title" name="title"><br>
+			<label for="category">Category:</label>
+			<select id="category" name="category">
+			  <option value="option1">1</option>
+			  <option value="option2">2</option>
+			  <option value="option3">3</option>
+			</select><br>
+			<input type="submit" value="Submit">
+		  </form>
+
 
 	<section id="contact">
 		<h2>Contact</h2>
@@ -131,5 +151,6 @@
 <script src="assets/JS/script.js"></script>
 <script src="assets/JS/modal.js"></script>
 <script src="assets/JS/logout.js"></script>
+<script src="assets/JS/postworks.js"></script>
 </body>
 </html>

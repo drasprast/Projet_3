@@ -1,4 +1,4 @@
-
+let modal = null;
 
 if (localStorage.token) {
   const filtres = document.querySelector('.filtres');
@@ -8,7 +8,7 @@ if (localStorage.token) {
   const aElement = document.createElement("a");
   aElement.innerHTML = "modifier";
   aElement.setAttribute("href", "#modal1");
-  aElement.classList.add("js_modal");
+  aElement.classList.add("js_modal", "filtres");
 
   const logout = document.querySelector('.js_logout');
   logout.innerHTML = "";
@@ -19,8 +19,6 @@ if (localStorage.token) {
 
   lienModifier.appendChild(aElement);
 }
-
-let modal = null;
 
 const openModal = (e) => {
   e.preventDefault();
