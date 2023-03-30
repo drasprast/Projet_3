@@ -3,42 +3,36 @@ const form = document.querySelector('.form');
 const emailInput = document.querySelector('.email');
 const passwordInput = document.querySelector('.password');
 
-form.addEventListener('submit', function(e) {
-  e.preventDefault();
+form.addEventListener('submit', async function(e) {
+e.preventDefault();
 
-  const email = emailInput.value;
-  const password = passwordInput.value;
+const email = emailInput.value;
+const password = passwordInput.value;
 
-  const data = {
-    email: email,
-    password: password
-  };
+const data = { email, password };
 
-  fetch(urlLogin, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  })
-  .then(response => {
-    if (!response.ok) {
-      if (response.status === 401 || response.status === 404) {
-        window.alert('Email ou mot de passe incorrect.');
-      }
-      throw new Error('Erreur de connexion');
-    }
-    return response.json();
-  })
-  .then(data => {
-    const token = data.token;
-    localStorage.setItem('token', token);
-    console.log(data.token);
-    window.location.href = 'index.html';  
-    
-    
-  })
-  .catch(error => {
-    console.error(error);
-  });
+try {
+
+const response = await fetch(urlLogin, {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify(data)
+});
+
+if (!response.ok) {
+
+if (response.status === 401 || response.status === 404) {
+window.alert('Email ou mot de passe incorrect.');
+}
+throw new Error('Erreur de connexion');
+}
+const { token } = await response.json();
+
+localStorage.setItem('token', token);
+console.log(token);
+window.location.href = 'index.html';
+
+} catch (error) {
+console.error(error);
+}
 });
