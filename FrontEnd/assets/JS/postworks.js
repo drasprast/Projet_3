@@ -2,7 +2,7 @@ const urlPostWork = "http://localhost:5678/api/works";
 const form = document.getElementById('myForm');
 
 form.addEventListener('submit', (event) => {
-  event.preventDefault(); //prevent form from reloading the page on submit
+  event.preventDefault();
   const formData = new FormData(form);
   const title = document.getElementById('title').value;
   const category = document.getElementById('category').value;
@@ -21,7 +21,7 @@ form.addEventListener('submit', (event) => {
   .then(response => {
     if (response.ok) {
       alert("succesful");
-      form.reset(); //clear the form
+      form.reset(); 
     } else {
       throw new Error('');
     }
