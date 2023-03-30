@@ -1,5 +1,7 @@
 const urlPostWork = "http://localhost:5678/api/works";
 const form = document.getElementById('myForm');
+const myKey = "token";
+const token = localStorage.getItem(myKey);
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -15,7 +17,7 @@ form.addEventListener('submit', (event) => {
     method: 'POST',
     body: formData,
     headers: {
-      'Authorization': `Bearer ${Auth.token}`
+      'Authorization': `Bearer ${token}`
     }
   })
   .then(response => {
