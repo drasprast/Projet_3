@@ -280,9 +280,9 @@ form span {
 	border-color: #1D6154;
 	border-radius: 60px;
 	border-width: 1px;
-	padding: 9px 20px;
+	padding: 9px 40px;
 	cursor: pointer;
-	margin-bottom: 28px;
+	margin-bottom: 23px;
 }
 
 
@@ -308,6 +308,8 @@ form span {
 	width: 600px;
 	max-width: 100vw;
 	max-height: 100vh;
+	position: relative;
+	border-radius: 10px;
 
 }
 
@@ -315,8 +317,34 @@ form span {
 	display: flex;
 }
 
+.modal_wrapper button{
+	font-family: 'syne';
+	font-size: 14px;
+	font-weight: 700;
+	color: #FFFFFF;
+	background-color: #1D6154;
+	border-color: #1D6154;
+	border-radius: 60px;
+	border-width: 1px;
+	padding: 9px 40px;
+	cursor: pointer;
+	margin-bottom: 28px;
+}
+
+#titlemodal{
+	font-size: 26px;
+	font-weight: 400;
+	padding: 60px 0 46px 0;
+}
+
 .close_modal{
 	cursor: pointer;
+	position: absolute;
+	top: 0;
+	right: 0;
+	transform: translate(-50%, 0%);
+	margin: 20px 20px 0 0;
+	font-size: 18px;
 }
 
 .js_button_logout{
@@ -362,4 +390,19 @@ form span {
 	cursor: pointer;
 	border-radius: 20px;
 	padding: 11px 23px;
+}
+
+.parent_modifier{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	align-items: baseline;
+	gap: 30px;
+}
+
+.lien_modifier{
+	display: flex;
+	flex-direction: row;
+	gap: 7px;
 }
