@@ -6,9 +6,11 @@ if (localStorage.token) {
 
   const lienModifier = document.querySelector('.lien_modifier');
   const aElement = document.createElement("a");
+  const iElement = document.createElement("i");
   aElement.innerText = "modifier";
   aElement.setAttribute("href", "#modal1");
   aElement.classList.add("js_modal", "filtres");
+  iElement.classList.add("fa-solid", "fa-pen-to-square")
 
   const logout = document.querySelector('.js_logout');
   logout.innerText = "";
@@ -17,6 +19,7 @@ if (localStorage.token) {
   aElementLogout.classList.add("js_button_logout");
   logout.appendChild(aElementLogout);
 
+  lienModifier.appendChild(iElement);
   lienModifier.appendChild(aElement);
 }
 

@@ -58,7 +58,7 @@ body {
 	font-size: 14px;
 }
 
-header .header_rd{
+.header_rd{
 	display: flex;
 	justify-content: space-between;
 	margin: 50px 0
@@ -334,6 +334,7 @@ form span {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	gap: 15px;
 	justify-content: center;
 	position: relative;
 	width: 100vw;
@@ -341,4 +342,24 @@ form span {
 	background-color: black;
 	left: 50%;
 	transform: translateX(-50%);
+}
+
+.button_inherit{
+	color: white;
+	border: none;
+	cursor: pointer;
+	outline: inherit;
+	background: none;
+}
+
+.button_edition{
+	display: flex;
+	gap: 5px;
+}
+
+.buton_publier{
+	border: none;
+	cursor: pointer;
+	border-radius: 20px;
+	padding: 11px 23px;
 }
