@@ -221,6 +221,8 @@ footer nav ul {
 
 
 .header_login{
+	display: flex;
+	justify-content: space-between;
 	margin: 50px 0 160px 0;
 }
 

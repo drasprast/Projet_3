@@ -1,3 +1,5 @@
+const url = 'http://localhost:5678/api/works';
+let projectsData;
 let modal = null;
 
 if (localStorage.token) {
