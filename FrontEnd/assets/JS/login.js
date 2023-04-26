@@ -36,3 +36,5 @@ window.location.href = 'index.html';
 console.error(error);
 }
 });
+
+

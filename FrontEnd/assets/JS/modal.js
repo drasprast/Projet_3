@@ -1,5 +1,7 @@
-
 let modal = null;
+// const urlModal = 'http://localhost:5678/api/works';
+// let projectsDataModal;
+// const divGalleryModal = document.querySelector('.gallery_modal');
 
 if (localStorage.token) {
   const filtres = document.querySelector('.filtres');
@@ -22,6 +24,31 @@ if (localStorage.token) {
 
   lienModifier.appendChild(iElement);
   lienModifier.appendChild(aElement);
+
+  // fetch(urlModal)
+  // .then((response) => response.json())
+  // .then((dataModal) => {
+  //   projectsDataModal = dataModal;
+  // })
+  // .catch((error) => console.log('Une erreur est survenue:', error));
+
+  // function projectDisplay(dataModal) {
+  //   divGalleryModal.innerHTML = "";
+  //   dataModal.forEach((projet) => {
+  //     const dataElement = document.createElement("figure");
+  //     dataElement.dataset.id = projet.id;
+  //     dataElement.dataset.categoryId = projet.categoryId;
+  
+  //     const imgElement = document.createElement("img");
+  //     imgElement.src = projet.imageUrl;
+
+  //     const titleElement = document.createElement("figcaption");
+  //     titleElement.innerText = "éditer";
+  
+  //     dataElement.appendChild(imgElement);
+  //     divGalleryModal.appendChild(dataElement);
+  //   });
+  // }
 }
 
 const openModal = (e) => {
@@ -64,4 +91,5 @@ window.addEventListener('keydown', function (e) {
     closeModal(e);
   }
 });
+
 
