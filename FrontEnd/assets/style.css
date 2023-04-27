@@ -355,9 +355,10 @@ form span {
   grid-column-gap: 7px;
   grid-row-gap: 10px;
 }
+
 .gallery_modal img {
 	max-width: 100%;
-  }
+}
 
 .js_button_logout{
 	padding: 0;
@@ -417,4 +418,20 @@ form span {
 	display: flex;
 	flex-direction: row;
 	gap: 7px;
+}
+
+.fa-trash-can{
+	font-size: 9px;
+}
+.trash_can{
+	position: absolute;
+	background-color: black;
+	padding: 5px;
+	border-radius: 4px;
+	color: #fff;
+	margin-top: 5px;
+	margin-left: 55px;
+	cursor: pointer;
+	font-size: 10px;
+	font-weight: 400;
 }
