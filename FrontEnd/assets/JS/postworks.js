@@ -1,7 +1,6 @@
 const urlPostWork = "http://localhost:5678/api/works";
 const form = document.getElementById('myForm');
-const myKey = "token";
-const token = localStorage.getItem(myKey);
+const token = localStorage.getItem('token');
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();

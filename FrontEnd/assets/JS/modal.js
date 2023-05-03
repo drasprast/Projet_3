@@ -1,5 +1,5 @@
 let modal = null;
-
+let tokenModal = localStorage.getItem('token');
 const urlModal = 'http://localhost:5678/api/works';
 let projectsDataModal;
 const divGalleryModal = document.querySelector('.gallery_modal');
@@ -38,11 +38,10 @@ if (localStorage.token) {
       divGalleryModal.appendChild(dataElement);
 
       trashIcon.addEventListener('click', (e) =>{
-        const myKey = "token";
-        const token = localStorage.getItem(myKey);
-        const workId = e.currentTarget.dataset.id;
         e.preventDefault();
-        deleteWork(workId, token);
+        const projectId = e.currentTarget.dataset.id;
+        console.log(projectId);
+        deleteWork(projectId);
       })
     });
   }
@@ -134,28 +133,20 @@ function modeEdition () {
   divBlackEdition.appendChild(buttonPublier);
 }
 
-
-
-
-
-
-
-function deleteWork() {
-  fetch(`http://localhost:5678/api/works/${workId}`, {
+function deleteWork(projectId) {
+  fetch(`http://localhost:5678/api/works/${projectId}`, {
     method: 'DELETE',
     headers: {
-      'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${tokenModal}`
     }
   })
   .then(function (response) {
     console.log(response);
     if (response.ok) {
-  
-      afficherImagesModal();
-     
-      afficherImages();
+      preventDefault();
+      
     } else {
-      console.error('Erreur lors de la suppression de l\'élément');
+      console.error('Erreur');
     }
   });
 }
