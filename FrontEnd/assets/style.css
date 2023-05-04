@@ -318,7 +318,7 @@ form span {
 	display: flex;
 }
 
-.modal_wrapper button{
+.js_modal_ajout_photo{
 	font-family: 'syne';
 	font-size: 14px;
 	font-weight: 700;
@@ -329,8 +329,23 @@ form span {
 	border-width: 1px;
 	padding: 9px 40px;
 	cursor: pointer;
-	margin-bottom: 28px;
 }
+
+.modal_wrapper a {
+	padding: 23px 0 48px 0;
+	color: #B1663C;
+	font-family: 'syne' ; 
+}
+
+.ligne_separative{
+  content: "";
+  display: block;
+  margin: 47px 0 38px 0;
+  width: 420px;
+  height: 1px;
+  background-color: #B3B3B3;
+}
+
 
 #titlemodal{
 	font-size: 26px;
@@ -434,4 +449,85 @@ form span {
 	cursor: pointer;
 	font-size: 10px;
 	font-weight: 400;
+}
+.titre_modal{
+	font-size: 26px;
+	padding: 40px 0 36px 0;
+}
+.formpost{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 420px;
+}
+
+#category{
+	width: 100%;
+    background: white;
+    border: none;
+    box-shadow: rgb(50 50 93 / 25%) 0px 6px 12px -2px, rgb(0 0 0 / 30%) 0px 3px 7px -3px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+#title{
+	width: 93%;
+    background: white;
+    border: none;
+    box-shadow: rgb(50 50 93 / 25%) 0px 6px 12px -2px, rgb(0 0 0 / 30%) 0px 3px 7px -3px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+.formpost label{
+	position: relative;
+	
+}
+
+.input_file_image{
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: aliceblue;
+    border-radius: 5px;
+    width: 100%;
+    padding-top: 110px;
+    padding-bottom: 10px;
+}
+
+.picture{
+	font-size: 5rem;
+    font-weight: 200;
+    color: #B9C5CC;
+    position: relative;
+    top: -70px;
+}
+
+.button_valider_travaille{
+	align-items: center;
+	justify-content: center;
+	margin-top: 2rem;
+    background: #1d6154;
+    border: 1px green solid;
+    border-radius: 20px;
+    padding: 10px;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+    width: 230px;
+}
+
+.bouton_ajouter_photo{
+	padding-left: 40px;
+    padding-right: 40px;
+    background-color: #CBD6DC;
+    border: 1px solid #CBD6DC;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 20px;
+    color: #306685;
+    position: relative;
+    top: -20px;
+    font-family: inter, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
 }

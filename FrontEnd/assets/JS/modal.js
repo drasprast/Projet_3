@@ -3,11 +3,12 @@ let tokenModal = localStorage.getItem('token');
 const urlModal = 'http://localhost:5678/api/works';
 let projectsDataModal;
 const divGalleryModal = document.querySelector('.gallery_modal');
+const modalAjoutPhoto = document.querySelector('.js_modal_ajout_photo');
+
 
 if (localStorage.token) {
   modeEdition();
   
-
   fetch(urlModal)
   .then((response) => response.json())
   .then((dataModal) => {
@@ -40,7 +41,6 @@ if (localStorage.token) {
       trashIcon.addEventListener('click', (e) =>{
         e.preventDefault();
         const projectId = e.currentTarget.dataset.id;
-        console.log(projectId);
         deleteWork(projectId);
       })
     });
@@ -89,6 +89,7 @@ window.addEventListener('keydown', function (e) {
 });
 
 
+
 function modeEdition () {
   const lienModifier = document.querySelector('.lien_modifier');
   const logout = document.querySelector('.js_logout');
@@ -131,7 +132,110 @@ function modeEdition () {
   divBlackEdition.appendChild(buttonEdition);
   buttonEdition.appendChild(logoButtonEdition);
   divBlackEdition.appendChild(buttonPublier);
-}
+};
+
+modalAjoutPhoto.addEventListener('click', function() {
+  const modalwraptest = document.querySelector('.modal_wrapper');
+  modalwraptest.innerHTML = "";
+
+  const createAsideModal = document.createElement("aside");
+  createAsideModal.classList.add("modal");
+
+  const divModal = document.createElement("div");
+  divModal.classList.add("modal_wrapper");
+
+  const leftArrow = document.createElement("i");
+  leftArrow.classList.add('fa-solid', 'fa-arrow-left', 'arrow');
+
+  const spanClose = document.createElement("span");
+  spanClose.classList.add('js_close_modal', 'close_modal')
+  spanClose.innerText = "X";
+
+  const titleModalAdd = document.createElement("h3");
+  titleModalAdd.classList.add('titre_modal');
+  titleModalAdd.innerText = "Ajout photo";
+
+  const createFormModal = document.createElement("form");
+  createFormModal.id = "myForm";
+  createFormModal.classList.add('formpost', 'modal_wrapper');
+
+  const divInputFile = document.createElement("div");
+  divInputFile.classList.add('input_file_image');
+
+  const pictureLogo = document.createElement("i");
+  pictureLogo.classList.add('fa-sharp', 'fa-regular', 'fa-image', 'picture');
+
+  const buttonAdd = document.createElement("button");
+  buttonAdd.classList.add('bouton_ajouter_photo');
+  buttonAdd.innerText = "+ Ajouter photo";
+
+  const spanInpuFile = document.createElement("span");
+  spanInpuFile.classList.add('text_caption');
+  spanInpuFile.innerText = "jpg,png: 4mo max";
+
+  const labelTitle = document.createElement("label");
+  labelTitle.setAttribute("for", "title");
+  labelTitle.innerText = "Titre";
+
+  const inputTitle = document.createElement("input");
+  inputTitle.setAttribute("type", "text");
+  inputTitle.setAttribute("id", "title");
+  inputTitle.setAttribute("name", "title");
+
+  const labelCategory = document.createElement("label");
+  labelCategory.setAttribute("for", "category");
+  labelCategory.innerText = "Catégorie";
+
+  const selectCategory = document.createElement("select");
+  selectCategory.setAttribute("id", "category");
+  selectCategory.setAttribute("name", "category");
+
+  const option1 = document.createElement("option");
+  option1.setAttribute("value", "option1");
+  option1.textContent = "Objets";
+  selectCategory.appendChild(option1);
+
+  const option2 = document.createElement("option");
+  option2.setAttribute("value", "option2");
+  option2.textContent = "Appartements";
+  selectCategory.appendChild(option2);
+
+  const option3 = document.createElement("option");
+  option3.setAttribute("value", "option3");
+  option3.textContent = "Hotels & restaurants";
+  selectCategory.appendChild(option3);
+
+  const spanLigne = document.createElement("span");
+  spanLigne.classList.add("ligne_separative");
+
+  const buttonValider = document.createElement("button");
+  buttonValider.classList.add("button_valider_travaille");
+  buttonValider.textContent = "Valider";
+
+  modalwraptest.appendChild(createAsideModal);
+  createAsideModal.appendChild(divModal);
+  divModal.appendChild(leftArrow);
+  divModal.appendChild(spanClose);
+  divModal.appendChild(titleModalAdd);
+  divModal.appendChild(createFormModal);
+  createFormModal.appendChild(divInputFile);
+  divInputFile.appendChild(pictureLogo);
+  divInputFile.appendChild(buttonAdd);
+  divInputFile.appendChild(spanInpuFile);
+  createFormModal.appendChild(labelTitle);
+  createFormModal.appendChild(inputTitle);
+  createFormModal.appendChild(labelCategory);
+  createFormModal.appendChild(selectCategory);
+  createFormModal.appendChild(spanLigne);
+  createFormModal.appendChild(buttonValider);
+
+  const arrowBackModal = document.querySelector('.arrow');
+  arrowBackModal.addEventListener('click', function(){
+    console.log("good");
+    openModal();
+  })
+  });
+
 
 function deleteWork(projectId) {
   fetch(`http://localhost:5678/api/works/${projectId}`, {
@@ -149,4 +253,4 @@ function deleteWork(projectId) {
       console.error('Erreur');
     }
   });
-}
+};
