@@ -16,6 +16,7 @@ form.addEventListener('submit', (event) => {
     method: 'POST',
     body: formData,
     headers: {
+      'content type': "application/json",
       'Authorization': `Bearer ${token}`
     }
   })

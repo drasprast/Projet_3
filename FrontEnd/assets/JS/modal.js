@@ -136,6 +136,7 @@ function modeEdition () {
 
 modalAjoutPhoto.addEventListener('click', function() {
   const modalwraptest = document.querySelector('.modal_wrapper');
+  
   modalwraptest.innerHTML = "";
 
   const createAsideModal = document.createElement("aside");
@@ -232,8 +233,8 @@ modalAjoutPhoto.addEventListener('click', function() {
   const arrowBackModal = document.querySelector('.arrow');
   arrowBackModal.addEventListener('click', function(){
     console.log("good");
-    openModal();
-  })
+  });
+
   });
 
 
