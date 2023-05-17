@@ -1,6 +1,6 @@
 let tokenModal = localStorage.getItem('token');
 const urlModal = 'http://localhost:5678/api/works';
-let projectsDataModal;
+const urlPostWork = "http://localhost:5678/api/works";
 
 
 createModal1();
@@ -44,7 +44,8 @@ modalAjoutPhoto.addEventListener("click", () =>{
   const button = document.querySelector('.bouton_ajouter_photo');
 
 if (button) {
-  button.addEventListener("click", () => {
+  button.addEventListener("click", (e) => {
+    e.preventDefault();
    fileInput.click();
   })}
 });
@@ -67,6 +68,7 @@ imageInput.addEventListener('change', function(event) {
 
   reader.onload = function(e) {
     displayImgMModal.style.display = "block";
+    imagePreviewDisplay();
     imagePreview.src = e.target.result;
   };
 
@@ -114,49 +116,6 @@ if (localStorage.token) {
     });
   }
 }
-
-
-// const openModal = (e) => {
-//   e.preventDefault();
-//   const target = document.querySelector(e.target.getAttribute('href'));
-//   target.style.display = null;
-//   target.removeAttribute('aria-hidden');
-//   target.setAttribute('aria-modal', true);
-//   modal = target;
-
-//   modal.addEventListener('click', closeModal);
-//   modal.querySelector('.js_close_modal').addEventListener('click', closeModal);
-//   modal.querySelector('.js_stop_modal').addEventListener('click', stopPropagation);
-// };
-
-// const closeModal = (e) => {
-//   if (modal === null) return;
-//   e.preventDefault();
-//   modal.style.display = "none";
-//   modal.setAttribute('aria-hidden', true);
-//   modal.removeAttribute('aria-modal');
-
-//   modal.removeEventListener('click', closeModal);
-//   modal.querySelector('.js_close_modal').removeEventListener('click', closeModal);
-//   modal.querySelector('.js_stop_modal').removeEventListener('click', stopPropagation);
-
-//   modal = null;
-// };
-
-// const stopPropagation = (e) => {
-//   e.stopPropagation();
-// };
-
-// document.querySelectorAll('.js_modal').forEach(a => {
-//   a.addEventListener('click', openModal);
-// });
-
-// window.addEventListener('keydown', function (e) {
-//   if (e.key === "Escape" || e.key === "Esc") {
-//     closeModal(e);
-//   }
-// });
-
 
 
 function modeEdition () {
@@ -356,15 +315,15 @@ categorySelectElement.setAttribute("name", "category");
 
 
 const option1Element = document.createElement("option");
-option1Element.setAttribute("value", "option1");
+option1Element.setAttribute("value", "Objets");
 option1Element.innerText = "Objets";
 
 const option2Element = document.createElement("option");
-option2Element.setAttribute("value", "option2");
+option2Element.setAttribute("value", "Appartements");
 option2Element.innerText = "Appartements";
 
 const option3Element = document.createElement("option");
-option3Element.setAttribute("value", "option3");
+option3Element.setAttribute("value", "Hotels & restaurants");
 option3Element.innerText = "Hotels & restaurants";
 
 categorySelectElement.appendChild(option1Element);
@@ -395,5 +354,60 @@ const modalContainer = document.querySelector(".modal-container");
 
 
 modalContainer.appendChild(dialogElement);
-
 }
+
+function imagePreviewDisplay () {
+  const iDisplay = document.querySelector('.picture');
+  const buttonDisplay = document.querySelector('.bouton_ajouter_photo');
+  const textCaption = document.querySelector('.text_caption');
+
+  iDisplay.style.display = 'none';
+  buttonDisplay.style.display= 'none';
+  textCaption.style.display = 'none';
+}
+
+
+function handleFormSubmit(event) {
+  event.preventDefault();
+  const form = document.getElementById('myForm');
+  const formData = new FormData(form);
+  const title = document.getElementById('title').value;
+  const categoryId = document.getElementById('category').value;
+  const imageUrl = document.getElementById('imageInput').files[0];
+  
+  formData.append('title', title);
+  formData.append('category', categoryId);
+  formData.append('image', imageUrl);
+  console.log(title);
+  console.log(categoryId);
+  console.log(imageUrl);
+  console.log(formData);
+  fetch(urlPostWork, {
+    method: 'POST',
+    body: formData,
+    headers: {
+      'content-type': 'application/json',
+      'authorization': `Bearer ${tokenModal}`
+    }
+  })
+  .then(response => {
+    if (response.ok) {
+      console.log(response);
+      
+    } else {
+      throw new Error('');
+    }
+    
+  })
+  .catch(error => {
+    
+    console.error('Error:', error);
+  });
+}
+
+
+
+const buttonEnvoyer = document.querySelector('.button_valider_travaille');
+if (buttonEnvoyer) {
+  buttonEnvoyer.addEventListener('click', handleFormSubmit);
+  };
