@@ -1,22 +1,19 @@
 let tokenModal = localStorage.getItem('token');
 const urlModal = 'http://localhost:5678/api/works';
-const urlPostWork = "http://localhost:5678/api/works";
-
 
 createModal1();
-
 createModal2();
 
-
+const closeModalClient = document.querySelector('.close_modal_client');
 const openModal1 = document.querySelector('.lien_modifier');
 const closeModal1 = document.querySelector('.close_modal');
 const closeModal2 = document.querySelector('.close_modal2');
 const modal1 = document.querySelector('.dialog');
 const modal2 = document.querySelector('.dialog2');
-
 const divGalleryModal = document.querySelector('.gallery_modal');
-
 const modalAjoutPhoto = document.querySelector('.js_modal_ajout_photo');
+const arrowBackModal = document.querySelector('.arrow');
+
 
 openModal1.addEventListener("click", () => {
   modal1.showModal();
@@ -31,6 +28,7 @@ closeModal1.addEventListener("click", () => {
 closeModal2.addEventListener("click", () => {
   modal2.close();
   modal2.style.display = 'none';
+  
 })
 
 modalAjoutPhoto.addEventListener("click", () =>{
@@ -50,8 +48,7 @@ if (button) {
   })}
 });
 
-const arrowBackModal = document.querySelector('.arrow');
-  arrowBackModal.addEventListener('click', function(){
+arrowBackModal.addEventListener('click', function(){
   modal2.close();
   modal2.style.display = 'none';
   modal1.showModal();
@@ -109,7 +106,7 @@ if (localStorage.token) {
       divGalleryModal.appendChild(dataElement);
 
       trashIcon.addEventListener('click', (e) =>{
-        e.preventDefault();
+        
         const projectId = e.currentTarget.dataset.id;
         deleteWork(projectId);
       })
@@ -144,9 +141,10 @@ function modeEdition () {
 
   const logoButtonEdition = document.createElement("i");
   const buttonEdition = document.createElement("button");
+  const buttonText = document.createTextNode("édition");
   logoButtonEdition.classList.add("fa-solid", "fa-pen-to-square");
   buttonEdition.classList.add("button_inherit", "button_edition");
-  buttonEdition.innerText = ("édition");
+  // buttonEdition.innerText = ("édition");
 
   const buttonPublier = document.createElement("button");
   buttonPublier.classList.add('buton_publier');
@@ -158,6 +156,7 @@ function modeEdition () {
   blackEdition.insertBefore(blackDivElement, blackEdition.firstChild);
   const divBlackEdition = document.querySelector('.background_black_edition');
   buttonEdition.appendChild(logoButtonEdition);
+  buttonEdition.appendChild(buttonText);
   divBlackEdition.appendChild(buttonEdition);
   divBlackEdition.appendChild(buttonPublier);
 
@@ -176,7 +175,6 @@ function deleteWork(projectId) {
   .then(function (response) {
     console.log(response);
     if (response.ok) {
-      preventDefault();
       
     } else {
       console.error('Erreur');
@@ -187,7 +185,7 @@ function deleteWork(projectId) {
 
 function createModal1 (){
   const dialogElement = document.createElement("dialog");
-  dialogElement.classList.add("dialog", "modal_wrapper");
+  dialogElement.classList.add("dialog", "modal_wrapper", "close_modal_client");
   
   const modalFlexDiv = document.createElement("div");
   modalFlexDiv.classList.add("modal_flex");
@@ -236,11 +234,11 @@ function createModal1 (){
 function createModal2(){
   
 const dialogElement = document.createElement("dialog");
-dialogElement.classList.add("dialog2", "modal_wrapper");
+dialogElement.classList.add("dialog2", "modal_wrapper", "close_modal_client");
 
-const closeSpanElement = document.createElement("span");
-closeSpanElement.classList.add("close_modal2");
-closeSpanElement.innerText = "x";
+const closeSpanElement = document.createElement("i");
+closeSpanElement.classList.add("close_modal2", "fa-solid", "fa-xmark");
+
 
 
 const arrowIconElement = document.createElement("i");
@@ -315,25 +313,28 @@ categorySelectElement.setAttribute("name", "category");
 
 
 const option1Element = document.createElement("option");
-option1Element.setAttribute("value", "Objets");
+option1Element.setAttribute("value", "1");
 option1Element.innerText = "Objets";
 
 const option2Element = document.createElement("option");
-option2Element.setAttribute("value", "Appartements");
+option2Element.setAttribute("value", "2");
 option2Element.innerText = "Appartements";
 
 const option3Element = document.createElement("option");
-option3Element.setAttribute("value", "Hotels & restaurants");
+option3Element.setAttribute("value", "3");
 option3Element.innerText = "Hotels & restaurants";
 
 categorySelectElement.appendChild(option1Element);
 categorySelectElement.appendChild(option2Element);
 categorySelectElement.appendChild(option3Element);
 
+const ligneSeparativeSpanElement = document.createElement("span");
+ligneSeparativeSpanElement.classList.add("ligne_separative");
 
 const validerButtonElement = document.createElement("button");
 validerButtonElement.classList.add("button_valider_travaille");
 validerButtonElement.innerText = "Valider";
+validerButtonElement.setAttribute("type", "submit");
 
 
 formElement.appendChild(inputFileImageDiv);
@@ -341,6 +342,7 @@ formElement.appendChild(titleLabelElement);
 formElement.appendChild(titleInputElement);
 formElement.appendChild(categoryLabelElement);
 formElement.appendChild(categorySelectElement);
+formElement.appendChild(ligneSeparativeSpanElement);
 formElement.appendChild(validerButtonElement);
 
 
@@ -355,6 +357,37 @@ const modalContainer = document.querySelector(".modal-container");
 
 modalContainer.appendChild(dialogElement);
 }
+
+modal1.addEventListener("click", e => {
+  const dialogDimensions = modal1.getBoundingClientRect()
+  if (
+    e.clientX < dialogDimensions.left ||
+    e.clientX > dialogDimensions.right ||
+    e.clientY < dialogDimensions.top ||
+    e.clientY > dialogDimensions.bottom
+  ) {
+    modal1.close();
+    modal1.style.display = 'none';
+    console.log("reussi");
+  }
+})
+modal2.addEventListener("click", e => {
+  const targetElement = e.target;
+  if (targetElement.tagName === 'INPUT') {
+    return;
+  }
+  const dialogDimensions = modal2.getBoundingClientRect()
+  if (
+    e.clientX < dialogDimensions.left ||
+    e.clientX > dialogDimensions.right ||
+    e.clientY < dialogDimensions.top ||
+    e.clientY > dialogDimensions.bottom
+  ) {
+    modal2.close();
+    modal2.style.display = 'none';
+    console.log("reussi");
+  }
+})
 
 function imagePreviewDisplay () {
   const iDisplay = document.querySelector('.picture');
@@ -372,24 +405,30 @@ function handleFormSubmit(event) {
   const form = document.getElementById('myForm');
   const formData = new FormData(form);
   const title = document.getElementById('title').value;
-  const categoryId = document.getElementById('category').value;
-  const imageUrl = document.getElementById('imageInput').files[0];
+  const image = document.getElementById('imageInput').files[0];
+  const category = document.getElementById('category').value;
+  
+
+  console.log(title);
+  console.log(category);
+  console.log(image);
+  console.log(formData);
+  console.log(tokenModal);
+
   
   formData.append('title', title);
-  formData.append('category', categoryId);
-  formData.append('image', imageUrl);
-  console.log(title);
-  console.log(categoryId);
-  console.log(imageUrl);
-  console.log(formData);
-  fetch(urlPostWork, {
+  formData.append('image', image);
+  formData.append('category', category);
+  
+  fetch(urlModal, {
     method: 'POST',
     body: formData,
     headers: {
-      'content-type': 'application/json',
+      'Content-Type': 'multipart/form-data',
       'authorization': `Bearer ${tokenModal}`
     }
   })
+
   .then(response => {
     if (response.ok) {
       console.log(response);
@@ -399,15 +438,14 @@ function handleFormSubmit(event) {
     }
     
   })
+
   .catch(error => {
     
     console.error('Error:', error);
   });
 }
 
-
-
 const buttonEnvoyer = document.querySelector('.button_valider_travaille');
 if (buttonEnvoyer) {
-  buttonEnvoyer.addEventListener('click', handleFormSubmit);
+  buttonEnvoyer.addEventListener('click', handleFormSubmit)
   };
