@@ -228,7 +228,6 @@ function createModal1 (){
   const sectionElement = document.querySelector(".modal-container");
   
   sectionElement.appendChild(dialogElement);
-
 }
 
 function createModal2(){
@@ -239,25 +238,19 @@ dialogElement.classList.add("dialog2", "modal_wrapper", "close_modal_client");
 const closeSpanElement = document.createElement("i");
 closeSpanElement.classList.add("close_modal2", "fa-solid", "fa-xmark");
 
-
-
 const arrowIconElement = document.createElement("i");
 arrowIconElement.classList.add("fa-solid", "fa-arrow-left", "arrow");
-
 
 const titleH3Element = document.createElement("h3");
 titleH3Element.classList.add("titre_modal");
 titleH3Element.innerText = "Ajout photo";
 
-
 const formElement = document.createElement("form");
 formElement.setAttribute("id", "myForm");
 formElement.classList.add("formpost");
 
-
 const inputFileImageDiv = document.createElement("div");
 inputFileImageDiv.classList.add("input_file_image");
-
 
 const pictureIconElement = document.createElement("i");
 pictureIconElement.classList.add("fa-sharp", "fa-regular", "fa-image", "picture");
@@ -295,12 +288,10 @@ titleLabelElement.setAttribute("for", "title");
 titleLabelElement.classList.add("label_title");
 titleLabelElement.innerText = "Titre";
 
-
 const titleInputElement = document.createElement("input");
 titleInputElement.setAttribute("type", "text");
 titleInputElement.setAttribute("id", "title");
 titleInputElement.setAttribute("name", "title");
-
 
 const categoryLabelElement = document.createElement("label");
 categoryLabelElement.setAttribute("for", "category");
@@ -351,9 +342,7 @@ dialogElement.appendChild(arrowIconElement);
 dialogElement.appendChild(titleH3Element);
 dialogElement.appendChild(formElement);
 
-
 const modalContainer = document.querySelector(".modal-container");
-
 
 modalContainer.appendChild(dialogElement);
 }
@@ -390,62 +379,117 @@ modal2.addEventListener("click", e => {
 })
 
 function imagePreviewDisplay () {
+  const inputFileImage = document.querySelector('.input_file_image');
   const iDisplay = document.querySelector('.picture');
   const buttonDisplay = document.querySelector('.bouton_ajouter_photo');
   const textCaption = document.querySelector('.text_caption');
 
+  inputFileImage.style.paddingTop = '0';
+  inputFileImage.style.paddingBottom = '0';
   iDisplay.style.display = 'none';
   buttonDisplay.style.display= 'none';
   textCaption.style.display = 'none';
 }
 
 
-function handleFormSubmit(event) {
-  event.preventDefault();
+function handleFormSubmit() {
   const form = document.getElementById('myForm');
-  const formData = new FormData(form);
   const title = document.getElementById('title').value;
-  const image = document.getElementById('imageInput').files[0];
-  const category = document.getElementById('category').value;
+  const imageInput = document.getElementById('imageInput');
+	const imageUrl = imageInput.files[0];
+  const categoryId = document.getElementById('category').value;
   
+form.addEventListener('submit', (event) => { 
+  event.preventDefault();
+  // const data = new FormData(form);
+  const data = new FormData();
+  data.append('title', title);
+  data.append('image', imageUrl);
+  data.append('category', categoryId);
 
   console.log(title);
-  console.log(category);
-  console.log(image);
-  console.log(formData);
+  console.log(categoryId);
+  console.log(imageUrl);
   console.log(tokenModal);
-
-  
-  formData.append('title', title);
-  formData.append('image', image);
-  formData.append('category', category);
+  console.log(data);
   
   fetch(urlModal, {
     method: 'POST',
-    body: formData,
     headers: {
-      'Content-Type': 'multipart/form-data',
+      // "Content-Type": "application/json",
       'authorization': `Bearer ${tokenModal}`
-    }
+    },
+    body: data
   })
 
   .then(response => {
     if (response.ok) {
       console.log(response);
-      
-    } else {
-      throw new Error('');
-    }
+      return response.json();
+    }  
+    //  else {
+    //   throw new Error('');
+    // }
     
+  })
+  .then(function(data){
+    console.log(data);
   })
 
   .catch(error => {
     
     console.error('Error:', error);
   });
+})
 }
 
 const buttonEnvoyer = document.querySelector('.button_valider_travaille');
 if (buttonEnvoyer) {
   buttonEnvoyer.addEventListener('click', handleFormSubmit)
   };
+
+
+  // function submitForm() {
+  // const urlApi = 'http://localhost:5678/api/works';  
+  // const form = document.getElementById('myForm');
+
+  // const formData = new FormData(form);
+  // const title = document.getElementById('title').value;
+  // const image = document.getElementById('imageInput').files[0];
+  // const category = document.getElementById('category').value;
+  
+
+  // console.log(title);
+  // console.log(category);
+  // console.log(image);
+  // console.log(tokenModal);
+
+  
+  // formData.append('title', title);
+  // formData.append('image', image);
+  // formData.append('category', category);
+  
+  //   fetch(urlApi, {
+  //     method: 'POST',
+  //     body: formData,
+  //     headers: {
+  //       'authorization': `Bearer ${tokenModal}`
+  //     }
+  //   })
+  //     .then(response => response.json())
+  //     .then(data => {
+       
+  //       console.log(data);
+  //     })
+  //     .catch(error => {
+       
+  //       console.error(error);
+  //     });
+  // }
+  
+  
+  // const myForm = document.getElementById('myForm');
+  // myForm.addEventListener('submit', function(event) {
+  //   event.preventDefault(); 
+  //   submitForm();
+  // });

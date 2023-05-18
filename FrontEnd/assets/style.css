@@ -497,8 +497,7 @@ dialog{
     align-items: center;
     background-color: aliceblue;
     border-radius: 5px;
-    width: 100%;
-    padding-top: 110px;
+    padding-top: 80px;
     padding-bottom: 10px;
 }
 
@@ -522,7 +521,7 @@ dialog{
     font-size: 15px;
     cursor: pointer;
     width: 230px;
-	margin: 32px 0 55px 0;
+	margin: 0 0 45px 0;
 	margin-left: auto;
     margin-right: auto;
 }
