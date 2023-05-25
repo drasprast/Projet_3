@@ -1,6 +1,3 @@
-
-
-
 const url = 'http://localhost:5678/api/works';
 let projectsData;
 
@@ -45,9 +42,7 @@ fetch(url)
   function filterProjects(categoryId) {
     const filteredProjects = projectsData.filter((projet) => projet.categoryId === categoryId);
     projectDisplay(filteredProjects);
-  };
-
-
+  }
 
 
 
@@ -229,11 +224,15 @@ function deleteWork(projectId) {
   .then(function (response) {
     console.log(response);
     if (response.ok) {
-      projectDisplay(projectsData);
+      
     } else {
       console.error('Erreur');
     }
+    recupererTravail().then(données => {
+      projectDisplayModal(données);
+      projectDisplay(données);
   });
+})
 };
 
 
@@ -460,12 +459,6 @@ form.addEventListener('submit', (event) => {
   data.append('title', title);
   data.append('image', imageUrl);
   data.append('category', categoryId);
-
-  console.log(title);
-  console.log(categoryId);
-  console.log(imageUrl);
-  console.log(tokenModal);
-  console.log(data);
   
   fetch(urlModal, {
     method: 'POST',
@@ -481,19 +474,15 @@ form.addEventListener('submit', (event) => {
       console.log(response);
       return response.json();
     }  
-    //  else {
-    //   throw new Error('');
-    // }
-    
   })
-  .then(function(data){
-    console.log(data);
-  })
-
   .catch(error => {
-    
     console.error('Error:', error);
   });
+  recupererTravail().then(données => {
+    projectDisplayModal(données);
+    projectDisplay(données);
+    window.location.href = 'index.html';
+});
 })
 }
 
@@ -503,47 +492,52 @@ if (buttonEnvoyer) {
   };
 
 
-  // function submitForm() {
-  // const urlApi = 'http://localhost:5678/api/works';  
-  // const form = document.getElementById('myForm');
+  function recupererTravail() {
+    return fetch('http://localhost:5678/api/works')
+      .then(response => response.json())
+      .catch(erreur => console.error(erreur));
+  }
 
-  // const formData = new FormData(form);
-  // const title = document.getElementById('title').value;
-  // const image = document.getElementById('imageInput').files[0];
-  // const category = document.getElementById('category').value;
-  
 
-  // console.log(title);
-  // console.log(category);
-  // console.log(image);
-  // console.log(tokenModal);
+//   function refreshAddPhoto() {
+//     imagePreview.remove();
 
-  
-  // formData.append('title', title);
-  // formData.append('image', image);
-  // formData.append('category', category);
-  
-  //   fetch(urlApi, {
-  //     method: 'POST',
-  //     body: formData,
-  //     headers: {
-  //       'authorization': `Bearer ${tokenModal}`
-  //     }
-  //   })
-  //     .then(response => response.json())
-  //     .then(data => {
-       
-  //       console.log(data);
-  //     })
-  //     .catch(error => {
-       
-  //       console.error(error);
-  //     });
+//     const inputFileImage = document.querySelector('.input_file_image');
+    
+//     inputFileImage.innerHTML = "";
+//     inputFileImage.style.paddingTop = '80px';
+//     inputFileImage.style.paddingBottom = '10px';
+// const pictureIconElement = document.createElement("i");
+// pictureIconElement.classList.add("fa-sharp", "fa-regular", "fa-image", "picture");
+
+// const filePreview = document.createElement("img");
+// filePreview.src = "#";
+// filePreview.alt = "Preview Uploaded Image";
+// filePreview.id = "file-preview";
+// filePreview.classList.add("image_preview");
+// filePreview.style.display = "none";
+
+// const inputPhotoButtonElement = document.createElement("input");
+// inputPhotoButtonElement.type = 'file';
+// inputPhotoButtonElement.id = 'imageInput';
+// inputPhotoButtonElement.setAttribute('accept', 'image/jpeg,image/png');
+// inputPhotoButtonElement.setAttribute('hidden', '');
+
+// const ajouterPhotoButtonElement = document.createElement("button");
+// ajouterPhotoButtonElement.classList.add("bouton_ajouter_photo");
+// ajouterPhotoButtonElement.innerText = "+ Ajouter photo";
+
+
+// const textCaptionSpanElement = document.createElement("span");
+// textCaptionSpanElement.classList.add("text_caption");
+// textCaptionSpanElement.innerText = "jpg,png: 4mo max";
+
+// inputFileImage.appendChild(filePreview);
+// inputFileImage.appendChild(pictureIconElement);
+// inputFileImage.appendChild(inputPhotoButtonElement);
+// inputFileImage.appendChild(ajouterPhotoButtonElement);
+// inputFileImage.appendChild(textCaptionSpanElement);
+
+// console.log(displayImgMModal);
+
   // }
-  
-  
-  // const myForm = document.getElementById('myForm');
-  // myForm.addEventListener('submit', function(event) {
-  //   event.preventDefault(); 
-  //   submitForm();
-  // });
