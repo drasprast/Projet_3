@@ -1,4 +1,5 @@
 const url = 'http://localhost:5678/api/works';
+let tokenModal = localStorage.getItem('token');
 let projectsData;
 
 const divGallery = document.querySelector('.gallery');
@@ -6,6 +7,7 @@ const boutonFilterBase = document.querySelector(".btn_filter_base");
 const boutonFilterObjets = document.querySelector(".btn_filter_objets");
 const boutonFilterAppartements = document.querySelector(".btn_filter_appartements");
 const boutonFilterRestaurants = document.querySelector(".btn_filter_restaurants");
+
 
 fetch(url)
   .then((response) => response.json())
@@ -45,11 +47,6 @@ fetch(url)
   }
 
 
-
-
-let tokenModal = localStorage.getItem('token');
-const urlModal = 'http://localhost:5678/api/works';
-
 createModal1();
 createModal2();
 
@@ -69,6 +66,7 @@ openModal1.addEventListener("click", () => {
   modal1.style.display = null;
   modal1.style.display = 'flex';
 })
+
 closeModal1.addEventListener("click", () => {
   modal1.close();
   modal1.style.display = 'none';
@@ -76,8 +74,7 @@ closeModal1.addEventListener("click", () => {
 
 closeModal2.addEventListener("click", () => {
   modal2.close();
-  modal2.style.display = 'none';
-  
+  modal2.style.display = 'none'; 
 })
 
 modalAjoutPhoto.addEventListener("click", () =>{
@@ -117,7 +114,6 @@ imageInput.addEventListener('change', function(event) {
     imagePreviewDisplay();
     imagePreview.src = e.target.result;
   };
-
   reader.readAsDataURL(file);
 });
 
@@ -125,7 +121,7 @@ imageInput.addEventListener('change', function(event) {
 if (localStorage.token) {
   modeEdition();
   
-  fetch(urlModal)
+  fetch(url)
   .then((response) => response.json())
   .then((dataModal) => {
     projectDisplayModal(dataModal);
@@ -154,15 +150,13 @@ if (localStorage.token) {
       dataElement.appendChild(titleElement);
       divGalleryModal.appendChild(dataElement);
 
-      trashIcon.addEventListener('click', (e) =>{
-        
+      trashIcon.addEventListener('click', (e) =>{ 
         const projectId = e.currentTarget.dataset.id;
         deleteWork(projectId);
       })
     });
   }
 }
-
 
 function modeEdition () {
   const lienModifier = document.querySelector('.lien_modifier');
@@ -213,7 +207,6 @@ function modeEdition () {
 
 };
 
-
 function deleteWork(projectId) {
   fetch(`http://localhost:5678/api/works/${projectId}`, {
     method: 'DELETE',
@@ -234,7 +227,6 @@ function deleteWork(projectId) {
   });
 })
 };
-
 
 function createModal1 (){
   const dialogElement = document.createElement("dialog");
@@ -413,6 +405,7 @@ modal1.addEventListener("click", e => {
     console.log("reussi");
   }
 })
+
 modal2.addEventListener("click", e => {
   const targetElement = e.target;
   if (targetElement.tagName === 'INPUT') {
@@ -444,7 +437,6 @@ function imagePreviewDisplay () {
   textCaption.style.display = 'none';
 }
 
-
 function handleFormSubmit() {
   const form = document.getElementById('myForm');
   const title = document.getElementById('title').value;
@@ -460,10 +452,9 @@ form.addEventListener('submit', (event) => {
   data.append('image', imageUrl);
   data.append('category', categoryId);
   
-  fetch(urlModal, {
+  fetch(url, {
     method: 'POST',
     headers: {
-      // "Content-Type": "application/json",
       'authorization': `Bearer ${tokenModal}`
     },
     body: data
@@ -491,7 +482,6 @@ if (buttonEnvoyer) {
   buttonEnvoyer.addEventListener('click', handleFormSubmit)
   };
 
-
   function recupererTravail() {
     return fetch('http://localhost:5678/api/works')
       .then(response => response.json())
@@ -499,45 +489,3 @@ if (buttonEnvoyer) {
   }
 
 
-//   function refreshAddPhoto() {
-//     imagePreview.remove();
-
-//     const inputFileImage = document.querySelector('.input_file_image');
-    
-//     inputFileImage.innerHTML = "";
-//     inputFileImage.style.paddingTop = '80px';
-//     inputFileImage.style.paddingBottom = '10px';
-// const pictureIconElement = document.createElement("i");
-// pictureIconElement.classList.add("fa-sharp", "fa-regular", "fa-image", "picture");
-
-// const filePreview = document.createElement("img");
-// filePreview.src = "#";
-// filePreview.alt = "Preview Uploaded Image";
-// filePreview.id = "file-preview";
-// filePreview.classList.add("image_preview");
-// filePreview.style.display = "none";
-
-// const inputPhotoButtonElement = document.createElement("input");
-// inputPhotoButtonElement.type = 'file';
-// inputPhotoButtonElement.id = 'imageInput';
-// inputPhotoButtonElement.setAttribute('accept', 'image/jpeg,image/png');
-// inputPhotoButtonElement.setAttribute('hidden', '');
-
-// const ajouterPhotoButtonElement = document.createElement("button");
-// ajouterPhotoButtonElement.classList.add("bouton_ajouter_photo");
-// ajouterPhotoButtonElement.innerText = "+ Ajouter photo";
-
-
-// const textCaptionSpanElement = document.createElement("span");
-// textCaptionSpanElement.classList.add("text_caption");
-// textCaptionSpanElement.innerText = "jpg,png: 4mo max";
-
-// inputFileImage.appendChild(filePreview);
-// inputFileImage.appendChild(pictureIconElement);
-// inputFileImage.appendChild(inputPhotoButtonElement);
-// inputFileImage.appendChild(ajouterPhotoButtonElement);
-// inputFileImage.appendChild(textCaptionSpanElement);
-
-// console.log(displayImgMModal);
-
-  // }
