@@ -3,6 +3,7 @@ let tokenModal = localStorage.getItem('token');
 let projectsData;
 
 const divGallery = document.querySelector('.gallery');
+
 const boutonFilterBase = document.querySelector(".btn_filter_base");
 const boutonFilterObjets = document.querySelector(".btn_filter_objets");
 const boutonFilterAppartements = document.querySelector(".btn_filter_appartements");
@@ -135,6 +136,8 @@ if (localStorage.token) {
       const trashIcon = document.createElement("i")
       trashIcon.classList.add('fa-solid', 'fa-trash-can', 'trash_can')
       trashIcon.dataset.id = projet.id;
+      const arrowsIcon = document.createElement("i");
+      arrowsIcon.classList.add('fa-solid', 'fa-arrows-up-down-left-right', 'arrows_icon');
       const dataElement = document.createElement("figure");
       dataElement.dataset.id = projet.id;
       dataElement.dataset.categoryId = projet.categoryId;
@@ -147,6 +150,7 @@ if (localStorage.token) {
 
       
       dataElement.appendChild(trashIcon);
+      dataElement.appendChild(arrowsIcon);
       dataElement.appendChild(imgElement);
       dataElement.appendChild(titleElement);
       divGalleryModal.appendChild(dataElement);
@@ -493,4 +497,16 @@ if (buttonEnvoyer) {
     buttonDisplay.style.display= 'none';
     textCaption.style.display = 'none';
   }
+
+  const logoutButton = document.querySelector('.js_button_logout');
+if (localStorage.token) {
+  logoutButton.addEventListener('click', () => {
+    try {
+      localStorage.removeItem('token');
+      window.location.reload();
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
+  });
+}
 

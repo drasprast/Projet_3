@@ -137,7 +137,7 @@ li:hover {
 	display: flex;
 	gap: 10px;
 	justify-content: center;
-	
+	padding-bottom: 50px;
 }
 .filtres button{
 	font-family: 'syne';
@@ -456,9 +456,25 @@ dialog{
 	margin-top: 5px;
 	margin-left: 55px;
 	cursor: pointer;
-	font-size: 10px;
-	font-weight: 400;
 }
+
+.arrows_icon{
+	position: absolute;
+	background-color: transparent;
+	padding: 5px;
+	border-radius: 4px;
+	color: transparent;
+	font-size: 9px;
+	cursor: pointer;
+	margin-top: 5px;
+	margin-left: 30px;
+}
+
+.arrows_icon:hover{
+	background-color: black;
+	color: #fff;
+}
+
 .titre_modal{
 	font-size: 26px;
 	padding: 40px 0 36px 0;
