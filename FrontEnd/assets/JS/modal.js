@@ -22,6 +22,7 @@ fetch(url)
   })
   .catch((error) => console.log('Une erreur est survenue:', error));
 
+
   function projectDisplay(data) {
     divGallery.innerHTML = "";
     data.forEach((projet) => {
@@ -187,7 +188,6 @@ function modeEdition () {
   const buttonText = document.createTextNode("édition");
   logoButtonEdition.classList.add("fa-solid", "fa-pen-to-square");
   buttonEdition.classList.add("button_inherit", "button_edition");
-  // buttonEdition.innerText = ("édition");
 
   const buttonPublier = document.createElement("button");
   buttonPublier.classList.add('buton_publier');
@@ -221,7 +221,7 @@ function deleteWork(projectId) {
     } else {
       console.error('Erreur');
     }
-    recupererTravail().then(données => {
+    getWork().then(données => {
       projectDisplayModal(données);
       projectDisplay(données);
   });
@@ -339,7 +339,6 @@ const titleInputElement = document.createElement("input");
 titleInputElement.setAttribute("type", "text");
 titleInputElement.setAttribute("id", "title");
 titleInputElement.setAttribute("name", "title");
-titleInputElement.required = true;
 
 const categoryLabelElement = document.createElement("label");
 categoryLabelElement.setAttribute("for", "category");
@@ -427,19 +426,6 @@ modal2.addEventListener("click", e => {
   }
 })
 
-function imagePreviewDisplay () {
-  const inputFileImage = document.querySelector('.input_file_image');
-  const iDisplay = document.querySelector('.picture');
-  const buttonDisplay = document.querySelector('.bouton_ajouter_photo');
-  const textCaption = document.querySelector('.text_caption');
-
-  inputFileImage.style.paddingTop = '0';
-  inputFileImage.style.paddingBottom = '0';
-  iDisplay.style.display = 'none';
-  buttonDisplay.style.display= 'none';
-  textCaption.style.display = 'none';
-}
-
 function handleFormSubmit() {
   const form = document.getElementById('myForm');
   const title = document.getElementById('title').value;
@@ -450,8 +436,8 @@ function handleFormSubmit() {
 
 form.addEventListener('submit', (event) => { 
   event.preventDefault();
-  if ((!imageUrl || imageUrl.length === 0) || (!title || title == "")) {
-    console.log('Please select a file.');
+  if ((!imageUrl || title == "")) {
+    console.log('Please select a file and a title.');
     return false;
   }
   const data = new FormData();
@@ -476,7 +462,7 @@ form.addEventListener('submit', (event) => {
   .catch(error => {
     console.error('Error:', error);
   });
-    recupererTravail().then(données => {
+    getWork().then(données => {
     projectDisplayModal(données);
     projectDisplay(données);
     window.location.href = 'index.html';
@@ -489,11 +475,22 @@ if (buttonEnvoyer) {
   buttonEnvoyer.addEventListener('click', handleFormSubmit)
   };
 
-  function recupererTravail() {
+  function getWork() {
     return fetch('http://localhost:5678/api/works')
       .then(response => response.json())
       .catch(erreur => console.error(erreur));
   }
 
-
+  function imagePreviewDisplay () {
+    const inputFileImage = document.querySelector('.input_file_image');
+    const iDisplay = document.querySelector('.picture');
+    const buttonDisplay = document.querySelector('.bouton_ajouter_photo');
+    const textCaption = document.querySelector('.text_caption');
+  
+    inputFileImage.style.paddingTop = '0';
+    inputFileImage.style.paddingBottom = '0';
+    iDisplay.style.display = 'none';
+    buttonDisplay.style.display= 'none';
+    textCaption.style.display = 'none';
+  }
 
