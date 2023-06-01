@@ -292,6 +292,7 @@ titleH3Element.innerText = "Ajout photo";
 
 const formElement = document.createElement("form");
 formElement.setAttribute("id", "myForm");
+formElement.noValidate = true;
 formElement.classList.add("formpost");
 
 const inputFileImageDiv = document.createElement("div");
@@ -312,6 +313,7 @@ inputPhotoButtonElement.type = 'file';
 inputPhotoButtonElement.id = 'imageInput';
 inputPhotoButtonElement.setAttribute('accept', 'image/jpeg,image/png');
 inputPhotoButtonElement.setAttribute('hidden', '');
+
 
 const ajouterPhotoButtonElement = document.createElement("button");
 ajouterPhotoButtonElement.classList.add("bouton_ajouter_photo");
@@ -337,6 +339,7 @@ const titleInputElement = document.createElement("input");
 titleInputElement.setAttribute("type", "text");
 titleInputElement.setAttribute("id", "title");
 titleInputElement.setAttribute("name", "title");
+titleInputElement.required = true;
 
 const categoryLabelElement = document.createElement("label");
 categoryLabelElement.setAttribute("for", "category");
@@ -444,9 +447,13 @@ function handleFormSubmit() {
 	const imageUrl = imageInput.files[0];
   const categoryId = document.getElementById('category').value;
   
+
 form.addEventListener('submit', (event) => { 
   event.preventDefault();
-  // const data = new FormData(form);
+  if ((!imageUrl || imageUrl.length === 0) || (!title || title == "")) {
+    console.log('Please select a file.');
+    return false;
+  }
   const data = new FormData();
   data.append('title', title);
   data.append('image', imageUrl);
@@ -469,7 +476,7 @@ form.addEventListener('submit', (event) => {
   .catch(error => {
     console.error('Error:', error);
   });
-  recupererTravail().then(données => {
+    recupererTravail().then(données => {
     projectDisplayModal(données);
     projectDisplay(données);
     window.location.href = 'index.html';
@@ -487,5 +494,6 @@ if (buttonEnvoyer) {
       .then(response => response.json())
       .catch(erreur => console.error(erreur));
   }
+
 
 
