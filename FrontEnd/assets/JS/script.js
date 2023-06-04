@@ -9,7 +9,6 @@ const boutonFilterObjets = document.querySelector(".btn_filter_objets");
 const boutonFilterAppartements = document.querySelector(".btn_filter_appartements");
 const boutonFilterRestaurants = document.querySelector(".btn_filter_restaurants");
 
-
 fetch(url)
   .then((response) => response.json())
   .then((data) => {
@@ -22,7 +21,6 @@ fetch(url)
     boutonFilterRestaurants.addEventListener("click", () => filterProjects(3));
   })
   .catch((error) => console.log('Une erreur est survenue:', error));
-
 
   function projectDisplay(data) {
     divGallery.innerHTML = "";
@@ -61,7 +59,6 @@ const modal2 = document.querySelector('.dialog2');
 const divGalleryModal = document.querySelector('.gallery_modal');
 const modalAjoutPhoto = document.querySelector('.js_modal_ajout_photo');
 const arrowBackModal = document.querySelector('.arrow');
-
 
 openModal1.addEventListener("click", () => {
   modal1.showModal();
