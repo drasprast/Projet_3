@@ -239,6 +239,7 @@ form{
 	display: flex;
 	flex-direction: column;
 	width: 379px;
+	margin: auto;
 }
 form h2{
 	margin: auto;
@@ -505,6 +506,11 @@ dialog{
 .formpost label{
 	padding: 25px 0 10px 0;
 	
+}
+
+#imageInput{
+	position: absolute;
+    z-index: -1;
 }
 
 .input_file_image{

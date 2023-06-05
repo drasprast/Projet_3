@@ -216,7 +216,7 @@ function deleteWork(projectId) {
     }
   })
   .then(function (response) {
-    console.log(response);
+    
     if (response.ok) {
       
     } else {
@@ -293,7 +293,6 @@ titleH3Element.innerText = "Ajout photo";
 
 const formElement = document.createElement("form");
 formElement.setAttribute("id", "myForm");
-formElement.noValidate = true;
 formElement.classList.add("formpost");
 
 const inputFileImageDiv = document.createElement("div");
@@ -313,8 +312,7 @@ const inputPhotoButtonElement = document.createElement("input");
 inputPhotoButtonElement.type = 'file';
 inputPhotoButtonElement.id = 'imageInput';
 inputPhotoButtonElement.setAttribute('accept', 'image/jpeg,image/png');
-inputPhotoButtonElement.setAttribute('hidden', '');
-
+inputPhotoButtonElement.required = true;
 
 const ajouterPhotoButtonElement = document.createElement("button");
 ajouterPhotoButtonElement.classList.add("bouton_ajouter_photo");
@@ -340,6 +338,7 @@ const titleInputElement = document.createElement("input");
 titleInputElement.setAttribute("type", "text");
 titleInputElement.setAttribute("id", "title");
 titleInputElement.setAttribute("name", "title");
+titleInputElement.required = true;
 
 const categoryLabelElement = document.createElement("label");
 categoryLabelElement.setAttribute("for", "category");
@@ -405,7 +404,6 @@ modal1.addEventListener("click", e => {
   ) {
     modal1.close();
     modal1.style.display = 'none';
-    console.log("reussi");
   }
 })
 
@@ -423,7 +421,7 @@ modal2.addEventListener("click", e => {
   ) {
     modal2.close();
     modal2.style.display = 'none';
-    console.log("reussi");
+    
   }
 })
 
@@ -435,12 +433,9 @@ function handleFormSubmit() {
   const categoryId = document.getElementById('category').value;
   
 
-form.addEventListener('submit', (event) => { 
-  event.preventDefault();
-  if ((!imageUrl || title == "")) {
-    console.log('Please select a file and a title.');
-    return false;
-  }
+form.addEventListener('submit', (e) => { 
+  e.preventDefault();
+    
   const data = new FormData();
   data.append('title', title);
   data.append('image', imageUrl);
@@ -456,7 +451,7 @@ form.addEventListener('submit', (event) => {
 
   .then(response => {
     if (response.ok) {
-      console.log(response);
+      
       return response.json();
     }  
   })

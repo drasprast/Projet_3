@@ -29,7 +29,6 @@ throw new Error('Erreur de connexion');
 const { token } = await response.json();
 
 localStorage.setItem('token', token);
-console.log(token);
 window.location.href = 'index.html';
 
 } catch (error) {
