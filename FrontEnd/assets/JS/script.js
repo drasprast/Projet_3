@@ -46,7 +46,6 @@ fetch(url)
     projectDisplay(filteredProjects);
   }
 
-
 createModal1();
 createModal2();
 
@@ -116,7 +115,6 @@ imageInput.addEventListener('change', function(event) {
   reader.readAsDataURL(file);
 });
 
-
 if (localStorage.token) {
   modeEdition();
   
@@ -145,7 +143,6 @@ if (localStorage.token) {
       const titleElement = document.createElement("figcaption");
       titleElement.innerText = "éditer";
 
-      
       dataElement.appendChild(trashIcon);
       dataElement.appendChild(arrowsIcon);
       dataElement.appendChild(imgElement);
@@ -203,9 +200,6 @@ function modeEdition () {
   buttonEdition.appendChild(buttonText);
   divBlackEdition.appendChild(buttonEdition);
   divBlackEdition.appendChild(buttonPublier);
-
- 
-
 };
 
 function deleteWork(projectId) {
@@ -216,7 +210,6 @@ function deleteWork(projectId) {
     }
   })
   .then(function (response) {
-    
     if (response.ok) {
       
     } else {
@@ -318,7 +311,6 @@ const ajouterPhotoButtonElement = document.createElement("button");
 ajouterPhotoButtonElement.classList.add("bouton_ajouter_photo");
 ajouterPhotoButtonElement.innerText = "+ Ajouter photo";
 
-
 const textCaptionSpanElement = document.createElement("span");
 textCaptionSpanElement.classList.add("text_caption");
 textCaptionSpanElement.innerText = "jpg,png: 4mo max";
@@ -344,11 +336,9 @@ const categoryLabelElement = document.createElement("label");
 categoryLabelElement.setAttribute("for", "category");
 categoryLabelElement.innerText = "Catégorie";
 
-
 const categorySelectElement = document.createElement("select");
 categorySelectElement.setAttribute("id", "category");
 categorySelectElement.setAttribute("name", "category");
-
 
 const option1Element = document.createElement("option");
 option1Element.setAttribute("value", "1");
@@ -374,7 +364,6 @@ validerButtonElement.classList.add("button_valider_travaille");
 validerButtonElement.innerText = "Valider";
 validerButtonElement.setAttribute("type", "submit");
 
-
 formElement.appendChild(inputFileImageDiv);
 formElement.appendChild(titleLabelElement);
 formElement.appendChild(titleInputElement);
@@ -382,7 +371,6 @@ formElement.appendChild(categoryLabelElement);
 formElement.appendChild(categorySelectElement);
 formElement.appendChild(ligneSeparativeSpanElement);
 formElement.appendChild(validerButtonElement);
-
 
 dialogElement.appendChild(closeSpanElement);
 dialogElement.appendChild(arrowIconElement);
@@ -421,7 +409,6 @@ modal2.addEventListener("click", e => {
   ) {
     modal2.close();
     modal2.style.display = 'none';
-    
   }
 })
 
@@ -432,7 +419,6 @@ function handleFormSubmit() {
 	const imageUrl = imageInput.files[0];
   const categoryId = document.getElementById('category').value;
   
-
 form.addEventListener('submit', (e) => { 
   e.preventDefault();
     
